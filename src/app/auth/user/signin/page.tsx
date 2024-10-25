@@ -9,7 +9,7 @@ const Page =  () => {
     console.log(isAuthenticated);
 
   return (
-      <div className="h-screen w-full flex flex-col items-center justify-center gap-20 text-black">
+      <div className="h-fit w-full flex flex-col items-center justify-center gap-20 text-black py-5">
           <div className="flex flex-col items-center justify-center gap-1">
               <div className="relative">
                   <h1 className="z-50 text-3xl font-mono font-bold text-[#4b695b]">Feedback Flow</h1>

@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id            String   @id @default(cuid())
+  kindeID       String   @unique
+  email         String   @unique
+  family_name   String
+  given_name    String
+  picture       String
+  feedback      feedback[]
+}
+
+model organization {
+  id            String   @id @default(cuid())
+  url           String
+  image         String
+  name          String
+  avg_rating    Float
+  products      product[]
+}
+
+model product {
+  id            String   @id @default(cuid())
+  name          String
+  description   String
+  image         String
+  organizationID String
+  organization  organization @relation(fields: [organizationID], references: [id])
+  categoryID    String
+  category      category @relation(fields: [categoryID], references: [id])
+  avg_rating    Float
+  feedback      feedback[]
+  created_at    DateTime @default(now())
+}
+
+model feedback {
+  id            String   @id @default(cuid())
+  ProductID     String
+  CustomerID    String
+  product      product @relation(fields: [ProductID], references: [id])
+  customer     user @relation(fields: [CustomerID], references: [id])
+  Rating        Int
+  Header        String
+  Review        String
+  sentiment     String
+  upVotes       Int
+  DownVotes     Int
+  DateofExperience  DateTime
+  DateofFeedback    DateTime
+  created_at    DateTime @default(now())
+}
+
+model category {
+  id            String   @id @default(cuid())
+  name          String
+  icon          String
+  products      product[]
+}

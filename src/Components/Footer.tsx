@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FaFacebook ,FaInstagram , FaTwitter , FaLinkedin} from "react-icons/fa";
 const Footer = () => {
   return (
-    <div className="bg-zinc-800 text-white">
+    <div className="bg-zinc-800 text-white border-t border-zinc-700 mt-10">
       <div className="container mx-auto p-10 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Branding and Description */}
         <div>

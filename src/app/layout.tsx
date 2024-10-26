@@ -27,8 +27,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} h-screen w-full antialiased`}
+      <body 
+        className={`${geistSans.variable} ${geistMono.variable} h-screen w-full antialiased bg-zinc-800`}
       >
         <Navbar/>
         <div className="pt-[9vh]"> {/* Adjust the padding based on the navbar's height */}

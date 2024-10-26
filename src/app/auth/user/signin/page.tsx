@@ -7,6 +7,9 @@ import { FcGoogle } from "react-icons/fc";
 const Page =  () => {
     const { isAuthenticated } = useKindeBrowserClient();
     console.log(isAuthenticated);
+    if (isAuthenticated) {
+        window.location.href = '/';
+    }
 
   return (
       <div className="h-fit w-full flex flex-col items-center justify-center gap-20 text-black py-5">

@@ -2,8 +2,6 @@
 import Link from "next/link"
 import { IoIosArrowRoundForward } from "react-icons/io";
 
-
-
 const AreyouaBusiness = () => {
   return ( 
     <div className="h-[25vw] rounded-3xl w-[50vw] bg-[#5D737E] flex items-center justify-between text-white px-10">

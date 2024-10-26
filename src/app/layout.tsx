@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "@/Components/Navbar";
-import Footer from "@/Components/Footer";
+import Navbar from "@/components/Components/Navbar";
+import Footer from "@/components/Components/Footer";
+import { Toaster } from "@/components/ui/toaster"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,14 +28,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body 
+      <body
         className={`${geistSans.variable} ${geistMono.variable} h-screen w-full antialiased bg-zinc-800`}
       >
-        <Navbar/>
+        <Navbar />
         <div className="pt-[9vh]"> {/* Adjust the padding based on the navbar's height */}
           {children}
         </div>
-        <Footer/>
+        <Footer />
+        <Toaster />
       </body>
     </html>
   );

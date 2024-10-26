@@ -25,10 +25,12 @@ model user {
 
 model organization {
   id            String   @id @default(cuid())
-  url           String
+  url           String   @unique
+  email         String   @unique
+  password      String
   image         String
   name          String
-  avg_rating    Float
+  avg_rating    Float    @default(0)
   products      product[]
 }
 

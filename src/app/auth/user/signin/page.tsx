@@ -1,30 +1,38 @@
 "use client"
+import { useToken } from "@/hooks/useToken";
 import { LoginLink, useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 
 
 const Page =  () => {
     const { isAuthenticated } = useKindeBrowserClient();
     console.log(isAuthenticated);
-    if (isAuthenticated) {
-        window.location.href = '/';
+    const router = useRouter();
+    if (isAuthenticated) 
+    {
+        router.push('/');
+    }
+    const token = useToken();
+    if (token) {
+        router.push('/dashboard');
     }
 
   return (
-      <div className="h-fit w-full flex flex-col items-center justify-center gap-20 text-black py-5">
+      <div className="h-fit w-full flex flex-col items-center justify-center gap-20 text-white py-5">
           <div className="flex flex-col items-center justify-center gap-1">
               <div className="relative">
-                  <h1 className="z-50 text-3xl font-mono font-bold text-[#4b695b]">Feedback Flow</h1>
-                  <div className="absolute -z-10 bottom-0.5 h-2.5 w-60 bg-[#87ffc579]"></div>
+                  <h1 className="z-50 text-3xl font-mono font-bold text-[#86e9b9]">Feedback Flow</h1>
+                  <div className="absolute -z-10 bottom-0.5 h-2.5 w-60 bg-[#6ab89279]"></div>
               </div>
               <p className="text-xs  font-light text-gray-600 font-sans">&quot;Empowering customers to voice their experiences&quot;</p>
           </div>
-          <div className="group text-black transition-all duration-500 ease-in-out">
-              <h1 className="text-4xl font-bold bg-left-bottom bg-gradient-to-r from-black to-black bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out">Read reviews. Write reviews. Find companies.</h1>
+          <div className="group t transition-all duration-500 ease-in-out">
+              <h1 className="text-4xl font-bold bg-left-bottom bg-gradient-to-r from-white to-white bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out">Read reviews. Write reviews. Find companies.</h1>
           </div>
           <div className="flex flex-col h-[10vw] w-[30vw] rounded-lg  shadow-md border border-zinc-400 shadow-black  items-center justify-center gap-5">
-              <h2 className="text-black text-lg font-semibold">Log in or sign up below</h2>
+              <h2 className=" text-lg font-semibold">Log in or sign up below</h2>
               <LoginLink authUrlParams={
                   {
                       connection_id: "conn_0192bec1b73960013fcf0f420dcdf941"

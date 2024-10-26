@@ -58,7 +58,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
-      <div className="bg-zinc-900 text-center py-4">
+      <div className="bg-zinc-800 text-center py-4">
         <p className="text-sm">© 2024 Feedback Flow. All rights reserved.</p>
       </div>
     </div>

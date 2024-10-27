@@ -4,7 +4,7 @@ import { toast } from "@/hooks/use-toast";
 import { useToken } from "@/hooks/useToken";
 import {  setCookie } from "@/lib/utils/Cookies";
 import { useRouter } from 'next/navigation';
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 const SignInPage = () => {
   const [loading, setLoading] = useState(false);
@@ -19,10 +19,11 @@ const SignInPage = () => {
   const token = useToken();
   const router = useRouter();
   
-  if (token ) {
-   router.push('/dashboard');
-  }
-
+  useEffect(() => {
+    if (token) {
+      router.push('/organization/dashboard');
+    }
+  }, [token, router]);
   const handleChange = async (e: FormEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
 
@@ -69,7 +70,7 @@ const SignInPage = () => {
           email: "",
           password: "",
         });
-        router.push('/dashboard');
+        router.push('/organization/dashboard');
       } else {
         toast({
           title: "Error",

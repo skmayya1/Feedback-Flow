@@ -5,7 +5,7 @@ import { useToken } from "@/hooks/useToken";
 import { setCookie } from "@/lib/utils/Cookies";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 
 const Page = () => {
@@ -26,9 +26,11 @@ const Page = () => {
   });
   const token = useToken();
   const router = useRouter()
-  if (token) { 
-    router.push('/dashboard')
-  }
+  useEffect(() => {
+    if (token) {
+      router.push('/organization/dashboard');
+    }
+  }, [token , router]); 
   
 
   const handleChange = async (e: FormEvent<HTMLInputElement>) => {
@@ -87,7 +89,7 @@ const Page = () => {
           password: "",
           logo: "",
         })
-        router.push('/dashboard')
+        router.push('/organization/dashboard')
       } else {
         toast({
           title: "Error",
@@ -113,7 +115,6 @@ const Page = () => {
 
   const checkLogo = async () => {    
     if (!formData.website) return;
-    
     const url = `https://logo.clearbit.com/${formData.website}`;
     console.log(url);
     setFormData((prev) => ({

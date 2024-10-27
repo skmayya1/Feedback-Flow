@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/utils/Prisma";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+
 
 export async function POST(req: NextRequest) {
     const { website, name, email, password, logo }: {
@@ -59,9 +59,7 @@ export async function POST(req: NextRequest) {
         if (!organization) {
             return NextResponse.json("Something went wrong", { status: 500 });
         }
-        const token = jwt.sign({ id: organization.id }, process.env.JWT_SECRET as string,)
-        console.log(token);
-        return NextResponse.json(token, { status: 201 });
+        return NextResponse.json(organization.id, { status: 201 });
     } catch (error) {
         console.error("Error creating organization:", error); // Improved logging
         return NextResponse.json("Something went wrong", { status: 500 });

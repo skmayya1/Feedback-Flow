@@ -3,6 +3,7 @@ import { useToken } from "@/hooks/useToken";
 import { LoginLink, useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
 
 
@@ -15,9 +16,11 @@ const Page =  () => {
         router.push('/');
     }
     const token = useToken();
-    if (token) {
-        router.push('/dashboard');
-    }
+    useEffect(() => {
+        if (token) {
+            router.push('/organization/dashboard');
+        }
+    }, [token, router]);
 
   return (
       <div className="h-fit w-full flex flex-col items-center justify-center gap-20 text-white py-5">

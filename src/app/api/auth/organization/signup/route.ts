@@ -4,12 +4,13 @@ import bcrypt from "bcryptjs";
 
 
 export async function POST(req: NextRequest) {
-    const { website, name, email, password, logo }: {
+    const { website, name, email, password, logo, category }: {
         website: string;
         name: string;
         email: string;
         password: string;
         logo: string;
+        category: string;
     } = await req.json();
 
 
@@ -51,6 +52,7 @@ export async function POST(req: NextRequest) {
                 email,
                 url: website,
                 password: hashedPassword,
+                categoryID: category
             },
             select: {
                 id: true,

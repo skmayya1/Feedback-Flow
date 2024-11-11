@@ -1,8 +1,13 @@
 import React from 'react'
+import Products from './Components/Products'
+import Reviews from './Components/Reviews'
 
 const ContentPart = () => {
   return (
-    <div>ContentPart</div>
+    <div className='flex'>
+      <Products />
+      <Reviews/>
+    </div>
   )
 }
 

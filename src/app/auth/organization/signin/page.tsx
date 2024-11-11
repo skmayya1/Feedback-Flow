@@ -3,6 +3,7 @@
 import { toast } from "@/hooks/use-toast";
 import { useToken } from "@/hooks/useToken";
 import {  setCookie } from "@/lib/utils/Cookies";
+import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import { FormEvent, useEffect, useState } from "react";
 
@@ -118,6 +119,7 @@ const SignInPage = () => {
         <button disabled={selectable} className="w-[75%] bg-[#87BBA2] outline-none text-zinc-800 p-2 my-2 border border-zinc-700 rounded-lg" type="submit">
           {loading ? "Loading..." : "Sign in"}
         </button>
+        <p className="text-zinc-300">Dont have an account? <Link className="text-green-300 underline" href='/auth/organization/signup'>Register</Link></p>
       </form>
     </div>
   );

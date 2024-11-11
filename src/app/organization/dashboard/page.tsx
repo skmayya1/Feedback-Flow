@@ -16,7 +16,7 @@ const Page = () => {
   }, [params])
   
   return (
-    <div className='text-white h-'> {/*bg-[#010508]*/}
+    <div className='text-white'> {/*bg-[#010508]*/}
       <Navbar />
       <MultiToggle />
       {

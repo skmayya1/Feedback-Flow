@@ -68,3 +68,20 @@
   }
 }
 
+.category-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px; /* Adjust as needed */
+}
+.category-name {
+  word-wrap: break-word;
+  max-width: 150px; /* Adjust as needed */
+}
+.category-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px; /* Or adjust based on layout needs */
+  text-align: center; /* Center text */
+}

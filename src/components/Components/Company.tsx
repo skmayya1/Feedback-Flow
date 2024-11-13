@@ -8,8 +8,8 @@ const Company = ({ data }: { data: Data }) => {
   console.log(data);
   
   return (
-      <div className='h-[14vh] w-[14vh] flex flex-col items-center justify-center gap-4 '>
-      <div className="h-12 w-12">
+      <div className='h-[14vh] w-[14vh] flex flex-col items-center justify-center gap-4 border rounded-lg border-zinc-700'>
+      <div className="h-12 w-12 rounded-lg overflow-hidden">
         <Image
           alt='logo'
           src={data.image}
@@ -18,7 +18,7 @@ const Company = ({ data }: { data: Data }) => {
         />
       </div>
       <div className="flex items-center justify-center flex-col">
-        <Link href={'/organization/'+data.id} className="text-zinc-200 font-semibold text-lg ">{data.name}</Link>
+        <Link href={'/organization/'+data.id} className="text-zinc-400  font-semibold text-sm hover:text-zinc-200 ">{data.name}</Link>
         <p className='text-green-500  font-semibold flex items-center gap-1'>{data.avg_rating} <IoIosStar/></p>
       </div>
       </div>

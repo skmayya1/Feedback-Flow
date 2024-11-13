@@ -5,14 +5,7 @@ import Link from 'next/link';
 
 const Companies = () => {
     const [data, setData] = useState<Data[]>([
-        {
-            avg_rating: 4.5,
-            email: "",
-            name: "Google",
-            image: "https://cdn.worldvectorlogo.com/logos/google-icon.svg",
-            url: "https://www.google.com",
-            id: 'ds'
-        }
+       
     ]);
 
     useEffect(() => {

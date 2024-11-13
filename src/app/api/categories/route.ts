@@ -12,7 +12,7 @@ export async function GET() {
             }
         }
         );
-        return NextResponse.json(categories);
+        return NextResponse.json(categories, { status: 200 });
     } catch (error) {
         console.log(error);
         return NextResponse.json("Something went wrong", { status: 500 });

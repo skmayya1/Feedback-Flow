@@ -2,13 +2,13 @@
 
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Link from "next/link";
-import { FaUser } from "react-icons/fa";
+import Image from "next/image";
 import React, { useEffect, useState } from 'react';
 import { useToken } from "@/hooks/useToken";
 import Logout from "./Logout";
 
 const Navbar = () => {
-    const { isAuthenticated, isLoading } = useKindeBrowserClient();
+    const { isAuthenticated,user, isLoading } = useKindeBrowserClient();
     const [isScrolled, setIsScrolled] = useState(false);
     const token = useToken();
     console.log(token);
@@ -61,8 +61,9 @@ const Navbar = () => {
                     )}
                     {(isAuthenticated && !isLoading) && (
                         <div className="flex items-center gap-3">
-                            <Link href="/" className="hover:bg-zinc-700 rounded-full p-2 transition-colors duration-300">
-                                <FaUser size={18} color="87BBA2" />
+                            <Link href="/" className="hover:bg-zinc-700 rounded-full p-2 transition-colors duration-300 gap-2.5 bg-zinc-800 items-center px-3 flex">
+                                <p className="font-bold">{user?.given_name}</p>
+                                {user?.picture && <Image src={user?.picture} alt="profile" width={35} height={35} className="rounded-full" />}         
                             </Link>
                         </div>
                     )}

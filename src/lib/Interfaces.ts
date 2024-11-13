@@ -7,3 +7,9 @@ interface Data {
     url: string;
     id: string;
 }
+
+export interface CategoryProps {
+        id: string;
+        name: string;
+        icon: string;
+}

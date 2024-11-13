@@ -7,7 +7,7 @@ import { IoIosArrowRoundForward } from "react-icons/io"
 const Intro = () => {
     const { isAuthenticated } = useKindeBrowserClient();
   return (
-          <div className="h-[25vw] rounded-3xl w-[50vw] bg-[#87BBA2] flex items-center justify-between text-white px-10">
+          <div className="h-[30vw] rounded-3xl w-[50vw] bg-[#87BBA2] flex items-center justify-between text-white px-10">
               <div className="flex flex-col gap-2">
               <h1 className="font-bold text-3xl">Help millions make the right choice</h1>
               <p className="font-light text-sm">Your feedback counts! Review your experience on Feedback Flow.</p>

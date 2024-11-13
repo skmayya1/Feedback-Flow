@@ -1,7 +1,7 @@
 "use client"
 import Overview from '@/components/Components/Dashboard/Components/Overview'
-import Products from '@/components/Components/Dashboard/Components/Products'
 import Reviews from '@/components/Components/Dashboard/Components/Reviews'
+import Settings from '@/components/Components/Dashboard/Components/Settings'
 import MultiToggle from '@/components/Components/Dashboard/MultiToggle'
 import Navbar from '@/components/Components/Dashboard/Navbar'
 import { useSearchParams } from 'next/navigation'
@@ -22,13 +22,10 @@ const Page = () => {
       {
         toggle === 'overview' ? (
         <Overview/>
-        ) : toggle === 'products' ? (
-        <Products/>
-          ) : toggle === 'reviews' ? (
+        ) : toggle === 'reviews' ? (
         <Reviews/>
-        ) : toggle === 'settings'&&(
-
-            <h1 className='text-4xl'>Products</h1>
+         ) : toggle === 'settings' && (
+        <Settings/>
         )
       }
     </div>

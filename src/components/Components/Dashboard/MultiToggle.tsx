@@ -24,7 +24,6 @@ const MultiToggle = () => {
   return (
     <div className='h-10 text-zinc-400 w-full px-28 flex items-center gap-16 border-b border-zinc-700'>
       <Toggle toggle={toggle} setToggle={updateParams} toggleName='Overview' />
-      <Toggle toggle={toggle} setToggle={updateParams} toggleName='Products' />
       <Toggle toggle={toggle} setToggle={updateParams} toggleName='Reviews' />
       <Toggle toggle={toggle} setToggle={updateParams} toggleName='Settings' />
     </div>

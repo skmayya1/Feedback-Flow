@@ -13,10 +13,10 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
                 id: id
             },
             select: {
+                id: true,
                 avg_rating: true,
                 name: true,
                 image: true,
-                products: true,
                 url: true,
                 email: true,
             }

@@ -8,7 +8,7 @@ const AreyouaBusiness = () => {
           <div className="flex flex-col gap-2">
               <h1 className="font-bold text-3xl">Are you a business?</h1>
               <p className="font-light text-sm"> Join FeedbackFlow to showcase the experiences of your satisfied customers.</p>
-              <Link className="flex gap-3 font-semibold items-center border rounded-full w-fit px-2 py-1 hover:scale-105 transition-all ease-in-out" href='/'>Get Started <IoIosArrowRoundForward/></Link>
+              <Link className="flex gap-3 font-semibold items-center border rounded-full w-fit px-2 py-1 hover:scale-105 transition-all ease-in-out" href='/auth/organization/signup'>Get Started <IoIosArrowRoundForward/></Link>
           </div>
           <div className="flex flex-col items-center">
               <h1 className="text-6xl font-bold">1K+</h1>

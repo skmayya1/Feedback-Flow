@@ -47,12 +47,12 @@ const Navbar = () => {
                     </Link>
                     {(!isAuthenticated && !isLoading && !token) && (
                         <div className="flex items-center gap-3">
-                            <Link href="/" className="group transition duration-300 font-medium text-sm">
+                            <Link href="/auth/user/signin" className="group transition duration-300 font-medium text-sm">
                                 Login
                                 <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[1px] bg-gray-300"></span>
                             </Link>
                             <Link
-                                href="/"
+                                href="/auth/organization/signup"
                                 className="text-black font-semibold text-xs px-4 py-2 bg-[#87BBA2] rounded-full hover:bg-[#96d6b7] transition-colors duration-300"
                             >
                                 For Businesses
@@ -68,7 +68,7 @@ const Navbar = () => {
                     )}
                     { 
                         token  && (
-                            <Link href="/dashbooard" className="group transition duration-300 font-medium text-sm">
+                            <Link href="/organization/dashboard" className="group transition duration-300 font-medium text-sm">
                                 Dashbooard <Logout/> 
                                 <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[1px] bg-gray-300 "></span>
                             </Link>

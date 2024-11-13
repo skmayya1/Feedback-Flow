@@ -1,5 +1,6 @@
 "use client"
 import AreyouaBusiness from "@/components/Components/AreyouaBusiness"
+import Companies from "@/components/Components/Companies"
 import Intro from "@/components/Components/Intro"
 import RecentReviews from "@/components/Components/RecentReviews"
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect"
@@ -26,8 +27,8 @@ const Page = () => {
         <h2 className="px-4 py-2  border border-zinc-700 rounded-full">Bought something recently? <Link className="text-yellow-200 underline" href='/'>Write a review</Link></h2>
         <span className="h-[0.1vh]  w-[30%] bg-zinc-700 "></span>
       </div>
-      <LogoutLink>LOGOUT</LogoutLink>
       <Intro />
+      <Companies />
       <RecentReviews />
       { !token  &&
         <AreyouaBusiness />

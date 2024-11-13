@@ -5,16 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
-import { CiLogout } from "react-icons/ci";
+import Logout from "../Logout";
+import { Data } from "@/lib/Interfaces";
 
-interface Data{
-  image: string;
-  name: string;
-  id: string;
-  url: string;
-  email: string;
-  avg_rating: number;
-}
 
 const Navbar = () => {
   const [data, setdata] =useState<Data>()
@@ -36,13 +29,12 @@ const Navbar = () => {
         setdata(Data);       
         }
         fetchData();
-    }, [token]); 
+       }, [token]); 
+  
     
   return (
     <div className="h-14 w-full flex items-center justify-between border-b border-zinc-700 px-10 ">
-      <div className="p-2 items-center justify-center hover:bg-zinc-700 rounded-full cursor-pointer">
-        <CiLogout size={18}/> 
-      </div>
+      <Logout/>
       <div className="flex gap-4 items-center">
         <Link href={'/organization/'+data?.id} className="font-bold text-base text-zinc-300  hover:text-green-200">{data?.name}</Link>
         <div className="bg-transparent rounded-full bg-cover items-center justify-center cursor-pointer">

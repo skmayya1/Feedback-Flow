@@ -11,7 +11,7 @@ const Intro = () => {
               <div className="flex flex-col gap-2">
               <h1 className="font-bold text-3xl">Help millions make the right choice</h1>
               <p className="font-light text-sm">Your feedback counts! Review your experience on Feedback Flow.</p>
-              <Link className="flex gap-3 font-semibold items-center border rounded-full w-fit px-2 py-1 hover:scale-105 transition-all ease-in-out" href={isAuthenticated ? '/':'auth/user/signin' }>
+              <Link className="flex gap-3 font-semibold items-center border rounded-full w-fit px-2 py-1 hover:scale-105 transition-all ease-in-out" href={isAuthenticated ? '/review':'auth/user/signin' }>
                   {isAuthenticated ? 'Write a review' : 'Sign up to write a review'}
                   <IoIosArrowRoundForward /></Link>
               </div>

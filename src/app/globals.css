@@ -85,3 +85,10 @@
   max-width: 120px; /* Or adjust based on layout needs */
   text-align: center; /* Center text */
 }
+
+input[type="date"]::-webkit-datetime-edit-text,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+  opacity: 0.6; /* Adjust opacity for a thinner look */
+}

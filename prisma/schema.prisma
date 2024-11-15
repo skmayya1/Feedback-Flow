@@ -27,24 +27,25 @@ model organization {
   avg_rating    Float    @default(0)
   categoryID    String
   category      category @relation(fields: [categoryID], references: [id])
+  feedback      feedback[]
 }
 
 
 
 model feedback {
   id            String   @id @default(cuid())
-  ProductID     String
   CustomerID    String
-  customer     user @relation(fields: [CustomerID], references: [id])
+  customer     user @relation(fields: [CustomerID], references: [kindeID])
+  CompanyID     String
+  company      organization @relation(fields: [CompanyID], references: [id])
   Rating        Int
   Header        String
   Review        String
-  sentiment     String
-  upVotes       Int
-  DownVotes     Int
-  DateofExperience  DateTime
-  DateofFeedback    DateTime
-  created_at    DateTime @default(now())
+  sentiment     String  
+  upVotes       Int     @default(0)
+  DownVotes     Int     @default(0)
+  DateofExperience  String
+  DateofFeedback    DateTime @default(now())
 }
 
 model category {

@@ -18,7 +18,12 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
                 name: true,
                 image: true,
                 url: true,
-                email: true,
+                feedback: true,
+                category: {
+                    select: {
+                        name: true
+                    }
+                }
             }
         })
         if (!Organization) {

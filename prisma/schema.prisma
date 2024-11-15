@@ -44,6 +44,7 @@ model feedback {
   sentiment     String  
   upVotes       Int     @default(0)
   DownVotes     Int     @default(0)
+  wasInvited    Boolean @default(false)
   DateofExperience  String
   DateofFeedback    DateTime @default(now())
 }

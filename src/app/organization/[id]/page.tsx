@@ -1,6 +1,6 @@
 "use client";
 
-import Reviews from "@/components/Components/Dashboard/Components/Reviews";
+import Reviews from "@/components/Components/Dashboard/Organization/Reviews";
 import Activity from "@/components/Components/Dashboard/Organization/Activity";
 import Relevant from "@/components/Components/Dashboard/Organization/Relevant";
 import WriteReview from "@/components/Components/Dashboard/Organization/WriteReview";
@@ -33,7 +33,7 @@ const Page = () => {
   }, [params.id]);
 
   return (
-    <div className="w-full text-white p-2 flex items-center justify-evenly py-16 flex-col">
+    <div className="w-full min-h-screen text-white p-2 flex items-center justify-evenly py-16 flex-col">
       {/* Organization Details */}
       <div className="flex gap-16 w-[80vw] border-b border-zinc-700 py-4">
         {/* Logo and Description */}
@@ -85,10 +85,10 @@ const Page = () => {
         </div>
       </div>
       {/* Reviews Section */}
-      <div className="h-[60vh] w-full py-5 items-center flex justify-center">
+      <div className="min-h-[60vh] w-full py-5 items-center flex justify-center">
         <div className="h-full w-[61.5%] border-r flex flex-col items-center justify-center border-zinc-700">
           <WriteReview id={Array.isArray(params.id) ? params.id[0] : params.id} />
-          <Reviews />
+          <Reviews id={Array.isArray(params.id) ? params.id[0] : params.id} />
         </div>  
         <div className="flex flex-col items-center justify-evenly w-[20%] h-full">
           <Activity />

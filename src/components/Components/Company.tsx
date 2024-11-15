@@ -19,7 +19,7 @@ const Company = ({ data }: { data: Data }) => {
       </div>
       <div className="flex items-center justify-center flex-col">
         <Link href={'/organization/'+data.id} className="text-zinc-400  font-semibold text-sm hover:text-zinc-200 ">{data.name}</Link>
-        <p className='text-green-500  font-semibold flex items-center gap-1'>{data.avg_rating} <IoIosStar/></p>
+        <p className='text-green-500  font-semibold flex items-center gap-1'>{data.avg_rating.toFixed(1)} <IoIosStar/></p>
       </div>
       </div>
   )

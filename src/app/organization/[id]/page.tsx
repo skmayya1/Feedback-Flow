@@ -23,14 +23,13 @@ const Page = () => {
       }
       const data = await res.json();
       setData(data);
-      console.log(data);
     } catch (error) {
       console.error("Error fetching organization data:", error);
     }
   };
 
   useEffect(() => {
-    fetchData();
+    fetchData()
   }, [params.id]);
 
   return (
@@ -87,10 +86,10 @@ const Page = () => {
       </div>
       {/* Reviews Section */}
       <div className="h-[60vh] w-full py-5 items-center flex justify-center">
-        <div className="h-full w-[61.5%] border-r border-zinc-700">
-          <WriteReview />
+        <div className="h-full w-[61.5%] border-r flex flex-col items-center justify-center border-zinc-700">
+          <WriteReview id={Array.isArray(params.id) ? params.id[0] : params.id} />
           <Reviews />
-        </div>
+        </div>  
         <div className="flex flex-col items-center justify-evenly w-[20%] h-full">
           <Activity />
           <Relevant />

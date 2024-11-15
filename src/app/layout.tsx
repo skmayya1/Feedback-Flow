@@ -35,7 +35,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} h-screen w-full antialiased bg-zinc-800`}
       >
         {!shouldHideNavAndFooter && <Navbar />}
-        <div className={` ${shouldHideNavAndFooter ? '' :'pt-[9vh]'}`}> 
+        <div className={` ${shouldHideNavAndFooter ? '' :' py-[9vh]'} bg-zinc-800`}> 
           {children}
         </div>
         {!shouldHideNavAndFooter && <Footer />}

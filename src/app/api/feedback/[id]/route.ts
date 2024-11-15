@@ -30,7 +30,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
                 CompanyID: id
             },
         });
-        calculateAndUpdateAvgRating(id).catch((error) => {
+         await calculateAndUpdateAvgRating(id).catch((error) => {
             console.error(error);
         });
         if (!FeedbackCreate) {

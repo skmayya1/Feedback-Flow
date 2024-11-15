@@ -1,5 +1,6 @@
 import { getSentiment } from "@/lib/utils/getSentiment";
 import { prisma } from "@/lib/utils/Prisma";
+import { calculateAndUpdateAvgRating } from "@/lib/utils/updateAvgrating";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -28,6 +29,9 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
                 CustomerID: user.id,
                 CompanyID: id
             },
+        });
+        calculateAndUpdateAvgRating(id).catch((error) => {
+            console.error(error);
         });
         if (!FeedbackCreate) {
             return NextResponse.json({ error: "An error occurred while submitting feedback" }, { status: 500 });

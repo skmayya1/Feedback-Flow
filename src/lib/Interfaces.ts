@@ -13,3 +13,27 @@ export interface CategoryProps {
         name: string;
         icon: string;
 }
+
+export interface OrganizationData{
+    avg_rating: number;
+    category: {
+        name: string;
+    };
+    feedback: Feedback[];
+    id: string;
+    image: string;
+    name: string;
+    url: string;
+}
+
+export interface Feedback {
+    CompanyID: string;
+    CustomerID: string;
+    DateofExperience: string; // Use ISO 8601 date format for clarity
+    DateofFeedback: string;   // Use ISO 8601 format for dates
+    DownVotes: number;
+    Header: string;           // Title of the feedback
+    Rating: number;           // Rating, typically 1-5
+    Review: string;
+    id: string;
+}

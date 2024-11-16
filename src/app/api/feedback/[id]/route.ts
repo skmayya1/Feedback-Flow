@@ -42,3 +42,28 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
         return NextResponse.json({ error: "An error occurred while submitting feedback" }, { status: 500 });
     }
 }
+export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+    try {
+        const { id } = await params;
+        const sort = req.nextUrl.searchParams.get('sort');
+
+        const feedbacks = await prisma.feedback.findMany({
+            where: { CompanyID: id },
+            orderBy: {
+                DateofFeedback: sort === '0' ? 'desc' : 'asc',
+            },
+            select: {
+                customer: {
+                    select: {
+                        given_name: true,
+                    },
+                }
+            }
+        });
+
+        return NextResponse.json(feedbacks);
+    } catch (error) {
+        console.error('Error fetching feedback:', error);
+        return NextResponse.json({ error: 'Error fetching feedback' }, { status: 500 });
+    }
+}

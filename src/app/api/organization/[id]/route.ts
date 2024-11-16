@@ -2,9 +2,7 @@ import { prisma } from '@/lib/utils/Prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
-    const { id } = params;
-    const sort = request.nextUrl.searchParams.get('sort'); // Retrieve sort query parameter
-    console.log(`Sort: ${sort}, Method: ${request.method}`);
+    const { id } = await params;
 
     if (!id) {
         return NextResponse.json({ error: 'Organization ID is required' }, { status: 400 });
@@ -13,60 +11,23 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     try {
         // Fetch organization data based on sort
         const organization = await prisma.organization.findUnique({
-            where: { id },
-            include: {
+            where: {
+                id: id,
+            },
+            select: {
+                avg_rating: true,
                 category: {
                     select: {
                         name: true,
                     },
                 },
-                feedback: sort === '1'
-                    ? {
-                        select: {
-                            id: true,
-                            Rating: true,
-                            DateofExperience: true,
-                            upVotes: true,
-                            Header: true,
-                            Review: true,
-                            sentiment: true,
-                            DateofFeedback: true,
-                            customer: {
-                                select: {
-                                    given_name: true,
-                                    family_name: true,
-                                    picture: true,
-                                },
-                            },
-                        },
-                        orderBy: {
-                            DateofFeedback: 'desc',
-                        },
-                    }
-                    : {
-                        select: {
-                            id: true,
-                            Rating: true,
-                            DateofExperience: true,
-                            upVotes: true,
-                            Header: true,
-                            Review: true,
-                            sentiment: true,
-                            DateofFeedback: true,
-                            customer: {
-                                select: {
-                                    given_name: true,
-                                    family_name: true,
-                                    picture: true,
-                                },
-                            },
-                        },
-                        orderBy: {
-                            sentiment: 'desc',                        },
-                    },
-            },
-        });
-
+                feedback: true,
+                id: true,
+                image: true,
+                name: true,
+                url: true,
+            }
+        })
         if (!organization) {
             return NextResponse.json({ error: 'Organization not found' }, { status: 404 });
         }

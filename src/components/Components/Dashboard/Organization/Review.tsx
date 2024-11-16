@@ -2,6 +2,7 @@ import { Feedback } from "@/lib/Interfaces";
 import { BiUpvote, BiDownvote, BiSolidUpvote, BiSolidDownvote } from "react-icons/bi";
 import { useState } from "react";
 import { formatDistanceToNow, parseISO } from "date-fns";
+import Image from "next/image";
 
 const Review = ({ feedback }: { feedback: Feedback }) => {
   const [upvoted, setUpvoted] = useState(false);
@@ -23,12 +24,13 @@ const Review = ({ feedback }: { feedback: Feedback }) => {
       <div className="flex items-center justify-between">
         <div className="flex gap-2 items-center justify-center">
           <div className="h-10 w-10 bg-zinc-700 rounded-full overflow-hidden">
-            {/* Placeholder for Poster Image */}
+          {feedback.customer.picture && <Image src={feedback.customer.picture} alt="profile" width={60} height={60} /> }
           </div>
-          <p className="font-semibold text-lg">{feedback. || "Anonymous"}</p>
-          <p className="text-zinc-600 font-light text-sm">
-            {formatDistanceToNow(parseISO(feedback.DateofFeedback), { addSuffix: true })}
-          </p>
+          <p className="font-semibold text-lg">{feedback.customer.given_name}</p>
+          <p className="text-zinc-500 font-light text-sm">
+            {feedback.DateofFeedback && (
+              formatDistanceToNow(parseISO(feedback.DateofFeedback), { addSuffix: true })
+            ) }          </p>
         </div>
         <p className="font-semibold text-zinc-500 text-sm">
           Date of Experience: {new Date(feedback.DateofExperience).toLocaleDateString()}

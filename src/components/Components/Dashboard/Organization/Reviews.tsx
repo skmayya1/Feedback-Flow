@@ -13,6 +13,8 @@ const Reviews = ({ id }: { id: string | undefined }) => {
         throw new Error('Failed to fetch feedback data');
       }
       const data: Feedback[] = await res.json();
+      console.log('feedback data:', data);
+      
       setFeedbackData(data);
     } catch (error) {
       console.error('Error fetching feedback data:', error);
@@ -43,12 +45,12 @@ const Reviews = ({ id }: { id: string | undefined }) => {
               checked={sortOrder === 1}
               onChange={sortHandler}
             />
-            <div className="swap-on">Recent</div>
-            <div className="swap-off">Relevant</div>
+            <div className="swap-on">Relevent</div>
+            <div className="swap-off">Recent</div>
           </label>
         </div>
       </div>
-      <div className="h-full w-full flex flex-col gap-5">
+      <div  className="h-full w-full flex flex-col gap-5">
         {feedbackData.map((feedback) => (
           <Review key={feedback.id} feedback={feedback} />
         ))}

@@ -29,6 +29,10 @@ export interface OrganizationData{
 export interface Feedback {
     CompanyID: string;
     CustomerID: string;
+    customer: {
+        given_name: string;
+        picture: string;
+    }
     DateofExperience: string; // Use ISO 8601 date format for clarity
     DateofFeedback: string;   // Use ISO 8601 format for dates
     DownVotes: number;

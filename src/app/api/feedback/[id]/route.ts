@@ -56,8 +56,18 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
                 customer: {
                     select: {
                         given_name: true,
+                        picture: true,
                     },
-                }
+                },
+                DateofExperience: true,
+                DateofFeedback: true,
+                DownVotes: true,
+                Header: true,
+                Rating: true,
+                sentiment: true,
+                id: true,
+                Review: true,
+                upVotes:true
             }
         });
 

@@ -8,8 +8,9 @@ export const getSentiment = async (text: string) => {
     }
     const genAI = new GoogleGenerativeAI(API_KEY);
     const model = await genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
+    console.log('d');
+    
     const prompt = `Analyze the sentiment of the following review and label it 'genuine' or 'not genuine'. Return only a single word.\n\nReview: "${text}"`;
     const result = await model.generateContent(prompt);
-    return result.response.text();
+    return result.response.text().split("\n")[0];
 };

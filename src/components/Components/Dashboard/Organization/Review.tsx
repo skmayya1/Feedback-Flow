@@ -1,8 +1,11 @@
 import { Feedback } from "@/lib/Interfaces";
-import { BiUpvote, BiDownvote, BiSolidUpvote, BiSolidDownvote } from "react-icons/bi";
+import { FaRegThumbsUp, FaThumbsUp } from "react-icons/fa";
 import { useState } from "react";
 import { formatDistanceToNow, parseISO } from "date-fns";
 import Image from "next/image";
+import { getRatingColor } from "@/lib/utils/Rating";
+import { BsFlag } from "react-icons/bs";
+
 
 const Review = ({ feedback }: { feedback: Feedback }) => {
   const [upvoted, setUpvoted] = useState(false);
@@ -13,10 +16,7 @@ const Review = ({ feedback }: { feedback: Feedback }) => {
     setUpvoted(!upvoted);
   };
 
-  const handleDownvote = () => {
-    if (upvoted) setUpvoted(false); // Prevent simultaneous upvote and downvote
-    setDownvoted(!downvoted);
-  };
+
 
   return (
     <div className="min-h-[10vh] w-full flex flex-col gap-2 p-3 border border-zinc-700 rounded-xl shadow-sm shadow-zinc-500">
@@ -37,35 +37,35 @@ const Review = ({ feedback }: { feedback: Feedback }) => {
         </p>
       </div>
       <div className="ml-10 flex flex-col items-start gap-2">
-        <span className="rating rating-sm">
-          {[1, 2, 3, 4, 5].map((value) => (
-            <input
-              key={value}
-              type="radio"
-              name={`rating-${feedback.id}`}
-              className="mask mask-star-2 bg-green-500"
-              defaultChecked={value === feedback.Rating}
-              value={value}
-              readOnly
-            />
-          ))}
-        </span>
+        <span style={{ color: getRatingColor(feedback.Rating as number) }}
+          className="rating rating-sm">
+            {[1, 2, 3, 4, 5].map((value) => (
+              <input
+                key={value}
+                type="radio"
+                name={`rating-${feedback.id}`}
+                className={`mask mask-star-2`}
+                defaultChecked={feedback.Rating === value}
+                value={value}
+                disabled
+              />
+
+            ))}
+          </span>
         <h1 className="font-semibold">{feedback.Header}</h1>
         <p className="font-light text-zinc-300">{feedback.Review}</p>
       </div>
       {/* Review Rating & Interaction */}
-      <div className="flex ml-10 gap-6 text-gray-400">
+      <div className="flex w-full justify-between px-5 text-gray-400">
         <button
-          className={`rounded-full p-1 hover:bg-zinc-700 ${upvoted ? "text-green-500" : ""}`}
+          className={`rounded-full p-1 hover:bg-zinc-700 flex gap-1 text-xs ${upvoted ? "" : "text-green-500"}`}
           onClick={handleUpvote}
         >
-          {upvoted ? <BiSolidUpvote size={24} /> : <BiUpvote size={24} />}
+          {upvoted ? <FaRegThumbsUp size={15} /> : <FaThumbsUp color="#22C55E" size={15} />}
+          Helpful
         </button>
-        <button
-          className={`rounded-full p-1 hover:bg-zinc-700 ${downvoted ? "text-red-500" : ""}`}
-          onClick={handleDownvote}
-        >
-          {downvoted ? <BiSolidDownvote size={24} /> : <BiDownvote size={24} />}
+        <button className={`rounded-full p-1 hover:bg-zinc-700 flex gap-1 text-xs`}>
+          <BsFlag/> 
         </button>
       </div>
     </div>

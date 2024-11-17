@@ -32,10 +32,9 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
             return NextResponse.json({ error: 'Organization not found' }, { status: 404 });
         }
 
-        // Exclude sensitive fields if necessary
         const sanitizedOrganization = {
             ...organization,
-            password: undefined, // Ensure no password field is returned
+            password: undefined, 
         };
 
         return NextResponse.json(sanitizedOrganization, { status: 200 });

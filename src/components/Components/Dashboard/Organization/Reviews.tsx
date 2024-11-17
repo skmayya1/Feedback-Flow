@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import Review from './Review';
-import { Feedback } from '@/lib/Interfaces';
+import { useEffect, useState } from "react";
+import Review from "./Review";
+import { Feedback } from "@/lib/Interfaces";
 
 const Reviews = ({ id }: { id: string | undefined }) => {
   const [feedbackData, setFeedbackData] = useState<Feedback[]>([]); // Default to an empty array
@@ -10,14 +10,14 @@ const Reviews = ({ id }: { id: string | undefined }) => {
     try {
       const res = await fetch(`/api/feedback/${id}/?sort=${sort}`);
       if (!res.ok) {
-        throw new Error('Failed to fetch feedback data');
+        throw new Error("Failed to fetch feedback data");
       }
       const data: Feedback[] = await res.json();
-      console.log('feedback data:', data);
-      
+      console.log("feedback data:", data);
+
       setFeedbackData(data);
     } catch (error) {
-      console.error('Error fetching feedback data:', error);
+      console.error("Error fetching feedback data:", error);
     }
   };
 
@@ -32,28 +32,42 @@ const Reviews = ({ id }: { id: string | undefined }) => {
   };
 
   return (
-    <div className="h-full w-full flex flex-col items-start py-5 justify-center px-24 gap-5">
-      <div className="w-full flex items-center justify-between text-zinc-400">
-        <h1 className="text-xl font-semibold">
-          Reviews ({feedbackData.length})
-        </h1>
-        <div className="flex gap-2 items-center font-semibold">
-          Sort:
-          <label className="swap bg-zinc-700 py-1 px-2 rounded-lg text-center hover:bg-zinc-900">
+    <div className="h-full w-full flex flex-col items-start py-6 px-8 lg:px-24 gap-6 bg-zinc-900">
+      {/* Header Section */}
+      <div className="w-full flex items-center justify-between text-zinc-400 border-b border-zinc-800 pb-4">
+        <div className="flex gap-8">
+          <button className="text-lg font-semibold text-green-500 hover:text-green-400 transition">
+            Reviews ({feedbackData.length})
+          </button>
+          <button className="text-lg font-semibold text-zinc-300 hover:text-white transition">
+            Q&A (0)
+          </button>
+        </div>
+        <div className="flex gap-3 items-center">
+          <span className="text-sm font-medium">Sort by:</span>
+          <label className="swap bg-zinc-800 py-1 px-3 rounded-lg text-center hover:bg-zinc-700 transition">
             <input
               type="checkbox"
               checked={sortOrder === 1}
               onChange={sortHandler}
             />
-            <div className="swap-on">Relevent</div>
-            <div className="swap-off">Recent</div>
+            <div className="swap-on text-green-400">Relevant</div>
+            <div className="swap-off text-green-400">Recent</div>
           </label>
         </div>
       </div>
-      <div  className="h-full w-full flex flex-col gap-5">
-        {feedbackData.map((feedback) => (
-          <Review key={feedback.id} feedback={feedback} />
-        ))}
+
+      {/* Reviews List */}
+      <div className="flex flex-col gap-6 w-full">
+        {feedbackData.length > 0 ? (
+          feedbackData.map((feedback) => (
+            <Review key={feedback.id} feedback={feedback} />
+          ))
+        ) : (
+          <div className="text-center text-zinc-400 py-10">
+            <p>No reviews available at the moment.</p>
+          </div>
+        )}
       </div>
     </div>
   );

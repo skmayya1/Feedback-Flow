@@ -42,6 +42,7 @@ model feedback {
   Header        String
   Review        String
   sentiment     String  
+  verified      Boolean @default(false)
   upVotes       Int     @default(0)
   DownVotes     Int     @default(0)
   wasInvited    Boolean @default(false)

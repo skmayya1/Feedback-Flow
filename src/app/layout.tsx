@@ -32,10 +32,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} h-screen w-full antialiased bg-zinc-800`}
+        className={`${geistSans.variable} ${geistMono.variable} h-screen w-full antialiased bg-zinc-900`}
       >
         {!shouldHideNavAndFooter && <Navbar />}
-        <div className={` ${shouldHideNavAndFooter ? '' :' py-[9vh]'} bg-zinc-800`}> 
+        <div className={` ${shouldHideNavAndFooter ? '' :' py-[9vh]'} bg-zinc-900`}> 
           {children}
         </div>
         {!shouldHideNavAndFooter && <Footer />}

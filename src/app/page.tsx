@@ -11,7 +11,7 @@ import Link from "next/link"
 const Page = () => {
   const token = useToken()
   return (
-    <div className="h-[250vh] w-full bg-zinc-800 flex flex-col items-center gap-12 ">
+    <div className="h-[250vh] w-full bg-zinc-900 flex flex-col items-center gap-12 ">
       <div className="h-[80%] flex flex-col  items-center justify-center gap-10">
         <div className="flex">
           <h1 className="text-6xl tracking-wider text-white font-bold">Your Voice,</h1>

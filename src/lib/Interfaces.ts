@@ -43,3 +43,12 @@ export interface Feedback {
     upVoted: boolean;
     upVotes: string[];
 }
+
+
+
+export interface ReleventData {
+    avg_rating: number;
+    image: string;
+    name: string;
+    id: string;
+}

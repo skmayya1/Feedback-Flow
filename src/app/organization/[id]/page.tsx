@@ -4,7 +4,7 @@ import Reviews from "@/components/Components/Dashboard/Organization/Reviews";
 import Activity from "@/components/Components/Dashboard/Organization/Activity";
 import Relevant from "@/components/Components/Dashboard/Organization/Relevant";
 import WriteReview from "@/components/Components/Dashboard/Organization/WriteReview";
-import { OrganizationData } from "@/lib/Interfaces";
+import { OrganizationData, ReleventData } from "@/lib/Interfaces";
 import { getRatingColor } from "@/lib/utils/Rating";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -14,6 +14,7 @@ import { FaLink } from "react-icons/fa";
 const Page = () => {
   const params = useParams();
   const [Data, setData] = useState<OrganizationData | null>(null);
+  const [RData, setRData] = useState<ReleventData[]>()
 
   const fetchData = async () => {
     try {
@@ -22,7 +23,10 @@ const Page = () => {
         throw new Error("Failed to fetch organization data");
       }
       const data = await res.json();
-      setData(data);
+      setData(data.organization);
+      setRData(data.relevantOrganizations)
+      console.log(data.relevantOrganizations);
+      
     } catch (error) {
       console.error("Error fetching organization data:", error);
     }
@@ -94,7 +98,7 @@ const Page = () => {
         {/* Sidebar Section */}
         <div className="w-full lg:w-1/4 flex flex-col gap-6">
           <Activity />
-          <Relevant />
+          {RData && <Relevant data={RData} />}
         </div>
       </div>
     </div>

@@ -26,8 +26,10 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
                 image: true,
                 name: true,
                 url: true,
-            }
-        })
+                categoryID: true,
+            },
+        });
+
         if (!organization) {
             return NextResponse.json({ error: 'Organization not found' }, { status: 404 });
         }
@@ -37,7 +39,43 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
             password: undefined, 
         };
 
-        return NextResponse.json(sanitizedOrganization, { status: 200 });
+        let relevantOrganizations = await prisma.organization.findMany({
+            where: {
+                categoryID: organization.categoryID,
+                id: {
+                    not: organization.id,
+                },
+            },
+            orderBy: {
+                avg_rating: 'desc',
+            },
+            select: {
+                avg_rating: true,
+                id: true,
+                image: true,
+                name: true  
+            },
+            take: 3,
+        });
+
+        if (relevantOrganizations.length === 0) {
+            relevantOrganizations = await prisma.organization.findMany({
+                orderBy: {
+                    avg_rating: 'desc', 
+                },
+                select: {
+                    avg_rating: true,
+                    id: true,
+                    image: true,
+                    name: true                },
+                take: 3, 
+            });
+        }
+
+        return NextResponse.json({
+            organization: sanitizedOrganization,
+            relevantOrganizations,
+        }, { status: 200 });
     } catch (error) {
         console.error('Error fetching organization:', error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

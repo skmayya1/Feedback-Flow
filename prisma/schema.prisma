@@ -43,8 +43,7 @@ model feedback {
   Review        String
   sentiment     String  
   verified      Boolean @default(false)
-  upVotes       Int     @default(0)
-  DownVotes     Int     @default(0)
+  upVotes       String[]     @default([])
   wasInvited    Boolean @default(false)
   DateofExperience  String
   DateofFeedback    DateTime @default(now())

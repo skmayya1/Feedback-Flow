@@ -40,4 +40,6 @@ export interface Feedback {
     Rating: number;           // Rating, typically 1-5
     Review: string;
     id: string;
+    upVoted: boolean;
+    upVotes: string[];
 }

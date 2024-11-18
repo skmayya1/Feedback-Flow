@@ -31,6 +31,7 @@ const Reviews = ({ id }: { id: string | undefined }) => {
     setSortOrder((prevSort) => (prevSort === 0 ? 1 : 0)); // Toggle sort order
   };
 
+
   return (
     <div className="h-full w-full flex flex-col items-start py-6 px-8 lg:px-24 gap-6 bg-zinc-900">
       {/* Header Section */}
@@ -61,7 +62,7 @@ const Reviews = ({ id }: { id: string | undefined }) => {
       <div className="flex flex-col gap-6 w-full">
         {feedbackData.length > 0 ? (
           feedbackData.map((feedback) => (
-            <Review key={feedback.id} feedback={feedback} />
+            <Review  key={feedback.id} feedback={feedback} />
           ))
         ) : (
           <div className="text-center text-zinc-400 py-10">

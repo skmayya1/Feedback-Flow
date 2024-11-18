@@ -1,16 +1,40 @@
 import { Feedback } from "@/lib/Interfaces";
 import { FaRegThumbsUp, FaThumbsUp } from "react-icons/fa";
-import { useState } from "react";
 import { formatDistanceToNow, parseISO } from "date-fns";
 import Image from "next/image";
 import { getRatingColor } from "@/lib/utils/Rating";
 import { BsFlag } from "react-icons/bs";
+import { useState } from "react";
 
 const Review = ({ feedback }: { feedback: Feedback }) => {
-  const [upvoted, setUpvoted] = useState(false);
+  // Local state for upvote toggle
+  const [upvoted, setupvoted] = useState(feedback.upVoted || false);
+  const [voteCount, setVoteCount] = useState(feedback.upVotes.length);
 
-  const handleUpvote = () => {
-    setUpvoted(!upvoted);
+  // Upvote handler
+  const upVoteHandler = async (feedbackId: string) => {
+    try {
+      const res = await fetch("/api/feedback", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ feedbackId }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to toggle upvote feedback");
+      }
+
+      const updatedFeedback: Partial<Feedback> = await res.json();
+      console.log("updated feedback:", updatedFeedback);
+
+      // Toggle local upvoted state and adjust vote count
+      setupvoted((prev) => !prev);
+      setVoteCount((prev) => (upvoted ? prev - 1 : prev + 1));
+    } catch (error) {
+      console.error("Error toggling upvote feedback:", error);
+    }
   };
 
   return (
@@ -65,14 +89,18 @@ const Review = ({ feedback }: { feedback: Feedback }) => {
 
       {/* Interaction Buttons */}
       <div className="flex justify-between items-center mt-2 px-3">
-        <button
-          className={`rounded-full px-3 py-1 text-xs flex items-center gap-1 ${upvoted ? "bg-green-600 text-white" : "bg-zinc-800 text-gray-400"
-            } hover:bg-zinc-700`}
-          onClick={handleUpvote}
-        >
-          {upvoted ? <FaThumbsUp size={14} /> : <FaRegThumbsUp size={14} />}
-          Helpful
-        </button>
+        <div className="flex gap-2 items-center">
+          <button
+            className={`rounded-full px-3 py-1 text-xs flex items-center gap-1 ${upvoted ? "bg-green-600 text-white" : "bg-zinc-800 text-gray-400"
+              } hover:bg-zinc-700`}
+            onClick={() => upVoteHandler(feedback.id)}
+          >
+            {upvoted ? <FaThumbsUp size={14} /> : <FaRegThumbsUp size={14} />}
+            Helpful
+          </button>
+          <p className="text-zinc-400 font-semibold text-sm">{voteCount}</p>
+        </div>
+
         <button className="rounded-full px-3 py-1 text-xs flex items-center gap-1 bg-zinc-800 text-gray-400 hover:bg-zinc-700">
           <BsFlag />
           Report

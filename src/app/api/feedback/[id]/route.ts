@@ -44,8 +44,10 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
 }
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
     try {
-        const { id } = await params;
+        const { id } = await params; // No need for `await`
         const sort = req.nextUrl.searchParams.get('sort');
+        const { getUser } = getKindeServerSession();
+        const user = await getUser(); // `getUser` does not need `await`
 
         const feedbacks = await prisma.feedback.findMany({
             where: { CompanyID: id },
@@ -61,17 +63,23 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
                 },
                 DateofExperience: true,
                 DateofFeedback: true,
-                DownVotes: true,
                 Header: true,
                 Rating: true,
                 sentiment: true,
                 id: true,
                 Review: true,
-                upVotes:true
-            }
+                upVotes: true,
+            },
         });
 
-        return NextResponse.json(feedbacks);
+       
+        const Data = feedbacks.map((feedback) => ({
+            ...feedback,
+            upVoted: feedback.upVotes.includes(user.id), 
+        }));
+
+        console.log('Data:', Data);
+        return NextResponse.json(Data);
     } catch (error) {
         console.error('Error fetching feedback:', error);
         return NextResponse.json({ error: 'Error fetching feedback' }, { status: 500 });
